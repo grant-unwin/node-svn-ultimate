@@ -496,6 +496,19 @@ var log = function( targets, options, callback ) {
 };
 exports.commands.log = log;
 
+var diff = function( source, dest, options, callback ) {
+
+	const urls = [source, dest];
+
+	if ( typeof options === 'function' ) {
+		callback = options;
+		options = null;
+	}
+	options = options || {};
+	addExtraOptions( [ 'quiet', 'depth', 'revision', 'verbose', 'limit' ], options );
+	executeSvn( [ 'diff' ].concat( urls ), options, callback );
+};
+exports.commands.diff = diff;
 
 /** Apply the differences between two sources to a working copy path.
  * @function merge
